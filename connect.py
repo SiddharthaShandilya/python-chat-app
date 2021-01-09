@@ -37,3 +37,5 @@ def startChat():
     #send.start()
     #recieve.start()
     sender()
+    
+startChat()
