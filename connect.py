@@ -34,8 +34,8 @@ def startChat():
     
     send = threading.Thread(target = sender)
     recieve = threading.Thread(target = reciever)
-    #send.start()
-    #recieve.start()
-    sender()
+    send.start()
+    recieve.start()
+    #sender()
     
 startChat()
