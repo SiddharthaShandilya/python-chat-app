@@ -1,0 +1,81 @@
+#________________________________________________________________________________________________
+import cv2
+  
+  
+# define a video capture object
+vid = cv2.VideoCapture(0)
+  
+while(True):
+      
+    # Capture the video frame
+    # by frame
+    ret, frame = vid.read()
+  
+    # Display the resulting frame
+    cv2.imshow('frame', frame)
+      
+    # the 'q' button is set as the
+    # quitting button you may use any
+    # desired button of your choice
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+  
+# After the loop release the cap object
+vid.release()
+# Destroy all the windows
+cv2.destroyAllWindows()
+
+#___________________________________________________________________________________________
+ 
+ #      ->  Below are for chat-app
+
+#___________________________________________________________________________________________
+import socket
+import threading
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+global_senderIp = 0
+def reciever(userIp,userPort):
+    
+    s.bind((userIp,userPort))
+    while True:
+        x = s.recvfrom(1024)
+        senderIp = x[1][0]
+        senderMessage = x[0].decode()
+        print("\t"+senderIp+"  :  "+senderMessage)
+        #print(x)
+        global_senderIp = senderIp
+
+    
+        
+def sender(senderIp):
+    if(senderIp==0):
+        senderIP = input("Enter the IP address of the reciever\t -->  ")
+    try:
+        message = input("\t message ->\t")
+        
+    except EOFError as e:
+        print(e)
+        pass
+    s.sendto(message.encode(),(senderIp,1234))
+        
+def findIp():   
+    hostname = socket.gethostname()    
+    hostIp = socket.gethostbyname(hostname)    
+    #print("Your Computer Name is:" + hostname)    
+    return(hostIp)
+
+
+def startChat():
+    userIp = findIp()
+    userPort = 1235
+    print("Your Computer IP is:\t" + userIp)
+    
+    send = threading.Thread(target = sender, args=(global_senderIp,))
+    recieve = threading.Thread(target = reciever, args=(userIp,userPort,))
+    send.start()
+    recieve.start()
+    #sender()
+   
+    
+startChat()
