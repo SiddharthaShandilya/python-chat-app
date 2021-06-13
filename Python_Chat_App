@@ -1,81 +1,46 @@
-#________________________________________________________________________________________________
-import cv2
-  
-  
-# define a video capture object
-vid = cv2.VideoCapture(0)
-  
-while(True):
-      
-    # Capture the video frame
-    # by frame
-    ret, frame = vid.read()
-  
-    # Display the resulting frame
-    cv2.imshow('frame', frame)
-      
-    # the 'q' button is set as the
-    # quitting button you may use any
-    # desired button of your choice
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-  
-# After the loop release the cap object
-vid.release()
-# Destroy all the windows
-cv2.destroyAllWindows()
-
-#___________________________________________________________________________________________
- 
- #      ->  Below are for chat-app
-
-#___________________________________________________________________________________________
 import socket
+import numpy as np
+#import cv2 as cv
 import threading
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-global_senderIp = 0
-def reciever(userIp,userPort):
-    
-    s.bind((userIp,userPort))
+#___________________________________________________________________________
+# client program socket to connect to the server program
+
+skt = socket.socket()
+skt.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+# empty means local system and make sure the mentioned port is free
+
+skt.bind(("", 4321))  
+#server_ip = "***************"     //directly input the data              
+server_ip = input("enter server ip: ")
+#server_port = 4321  // Make sure that the client is present on the same Port as Mentioned
+server_port = input("enter server port number: ")
+
+skt.connect((server_ip, int(server_port)))
+
+#______________________________________________________________________
+
+def send():
     while True:
-        x = s.recvfrom(1024)
-        senderIp = x[1][0]
-        senderMessage = x[0].decode()
-        print("\t"+senderIp+"  :  "+senderMessage)
-        #print(x)
-        global_senderIp = senderIp
+        c = input("localhost||-->> ENter message ->   ")
+        if c == "EXIT":
+            skt.close()
+        skt.send(c.encode())
 
-    
-        
-def sender(senderIp):
-    if(senderIp==0):
-        senderIP = input("Enter the IP address of the reciever\t -->  ")
-    try:
-        message = input("\t message ->\t")
-        
-    except EOFError as e:
-        print(e)
-        pass
-    s.sendto(message.encode(),(senderIp,1234))
-        
-def findIp():   
-    hostname = socket.gethostname()    
-    hostIp = socket.gethostbyname(hostname)    
-    #print("Your Computer Name is:" + hostname)    
-    return(hostIp)
+def recieve():
+    while True:
+        data  = skt.recv(1024)
+        print(data)
+
+#__________________________________________________________________________
+#send()#skt.send(b"connected")
+#data = skt.recv(1024)
+#print(data)
+send = threading.Thread(target = send, args=())
+recieve = threading.Thread(target = recieve, args=())
 
 
-def startChat():
-    userIp = findIp()
-    userPort = 1235
-    print("Your Computer IP is:\t" + userIp)
-    
-    send = threading.Thread(target = sender, args=(global_senderIp,))
-    recieve = threading.Thread(target = reciever, args=(userIp,userPort,))
-    send.start()
-    recieve.start()
-    #sender()
-   
-    
-startChat()
+send.start()
+recieve.start()
+#skt.close()
