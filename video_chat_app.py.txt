@@ -1,0 +1,66 @@
+import socket
+import numpy as np
+import cv2
+import threading
+
+#___________________________________________________________________________
+# client program socket to connect to the server program
+
+skt = socket.socket()
+skt.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+# empty means local system and make sure the mentioned ports are free
+
+skt.bind(("", 4321))  
+#server_ip = "***************"     //directly input the data              
+server_ip = input("enter server ip: ")
+#server_port = 4321  // Make sure that the client is present on the same Port as Mentioned
+server_port = input("enter server port number: ")
+
+skt.connect((server_ip, int(server_port)))
+print("SERVER CONNECTED")
+#________________________________________________________________________________________
+#       ACCESSING CAMERA
+
+vid = cv2.VideoCapture(0)
+#_____________________________________________________________________________________
+def send():
+    while True:
+        #c = input("localhost||-->> ENter message ->   ")
+        ret, frame = vid.read()
+        photo = cv.resize(photo, (640, 480))# have to use cv.resize to avoid losing data
+        #print(photo.shape)
+        #c = np.ndarray.tobytes(photo) #converting numpy array to bytes
+        if ret:
+            skt.send(np.ndarray.tobytes(photo))#converting the array into bytes before sending
+        else:
+            print("Could not get frame")
+    camera.release()
+        
+#___________________________________________________________________________
+def receive():
+    framesLost = 0
+    print("Entered")
+    while True:
+        framesLost += 1 # counting frame
+        data = skt.recv(100000000)  # receiving data with the size limit
+        if(data == b'finished'): # to stop receiving and stop camera
+            print("Finished")
+            camera.release()
+            skt.close()
+        else:  
+            photo =  np.frombuffer(data, dtype=np.uint8)# converting the byte data into numpy array
+            if len(photo) == 640*480*3: # changing the array shape and getting the video
+                cv.imshow('From Server', photo.reshape(480, 640, 3))
+                # camera closing condition-> CLICK  Q
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    skt.send(b'finished')
+                    camera.release()
+                    cv.destroyAllWindows()
+                    break
+            else:
+                print("Lost {} frames".format(framesLost) ) #counting the lost frames during video exchange
+
+#________________________________________________________________________
+threading.Thread(target=receive).start()
+threading.Thread(target=send).start()
