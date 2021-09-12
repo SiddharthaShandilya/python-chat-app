@@ -9,7 +9,7 @@
 
 A Python script that allows multiple users to interact with each other via text messaging.
 
-Here are the screenshots of working example on an AWS Linux Instanc.
+Here are the screenshots of working example on an AWS Linux Instance.
 
 
 <!-- #`oh-my-zsh` with `powerlevel9k` theme and `powerline nerd-font + awesome-config` font with the `Solarized Dark` color theme. -->
@@ -48,7 +48,8 @@ Here are the screenshots of working example on an AWS Linux Instanc.
 - [Updating](#updating)
 - [Uninstallation](#uninstallation)
 - [Contributing](#contributing)
-- [License](#license)
+
+</br></br>
 
 # Usage
 
@@ -57,6 +58,7 @@ Here are the screenshots of working example on an AWS Linux Instanc.
 Man pages have been added. Checkout `man colorls`.
 
 
+</br>
 
 # Installation
 
@@ -87,6 +89,9 @@ Man pages have been added. Checkout `man colorls`.
 
 6. Have a look at [Recommended configurations](#recommended-configurations) and [Custom configurations](#custom-configurations).
 
+
+</br></br>
+
 # Recommended configurations
 
 
@@ -103,7 +108,7 @@ Man pages have been added. Checkout `man colorls`.
     subl $(dirname $(gem which colorls))/yaml
     ```
 
-
+</br></br>
 
 # Custom configurations
 
@@ -153,7 +158,7 @@ You can overwrite the existing icons and colors mapping by copying the yaml file
   - [@rjhilgefort](https://gist.github.com/rjhilgefort/51ea47dd91bcd90cd6d9b3b199188c16)
 
 
-
+</br></br>
 
 # Updating
 
@@ -166,7 +171,7 @@ gem update colorls
 ```
 
 
-
+</br></br>
 
 # Uninstallation
 
@@ -178,17 +183,13 @@ Want to uninstall and revert back to the old style? No issues (sob). Please feel
 gem uninstall colorls
 ```
 
-
+</br></br></br>
 
 # Contributing
 
 [(Back to top)](#table-of-contents)
 
 Your contributions are always welcome! Please have a look at the [contribution guidelines](CONTRIBUTING.md) first. :tada:
-
-# License
-
-[(Back to top)](#table-of-contents)
 
 
 
