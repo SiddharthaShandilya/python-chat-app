@@ -65,6 +65,7 @@ Man pages have been added. Checkout `man colorls`.
 
 # Installation
 
+<!--
 [(Back to top)](#table-of-contents)
 
 1. Install Ruby (preferably, version >= 2.5)
@@ -92,13 +93,16 @@ Man pages have been added. Checkout `man colorls`.
 
 6. Have a look at [Recommended configurations](#recommended-configurations) and [Custom configurations](#custom-configurations).
 
-
+-->
 </br></br>
+
 
 # Recommended configurations
 
 
 [(Back to top)](#table-of-contents)
+
+<!--
 
 1. To add some short command (say, `lc`) with some flag options (say, `-l`, `-A`, `--sd`) by default, add this to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.) :
     ```sh
@@ -160,18 +164,20 @@ You can overwrite the existing icons and colors mapping by copying the yaml file
 
   - [@rjhilgefort](https://gist.github.com/rjhilgefort/51ea47dd91bcd90cd6d9b3b199188c16)
 
-
+-->
 </br></br>
 
 # Updating
 
 [(Back to top)](#table-of-contents)
 
-Want to update to the latest version of `colorls`?
+Want to update to the latest version of `chat_app`?
 
+<!--
 ```sh
 gem update colorls
 ```
+-->
 
 
 </br></br>
@@ -180,13 +186,15 @@ gem update colorls
 
 [(Back to top)](#table-of-contents)
 
-Want to uninstall and revert back to the old style? No issues (sob). Please feel free to open an issue regarding how we can enhance `colorls`.
+Want to uninstall and revert back to the old style? No issues (sob). Please feel free to open an issue regarding how we can enhance `chat_app`.
 
+<!--
 ```sh
 gem uninstall colorls
 ```
+-->
 
-</br></br></br>
+</br></br>
 
 # Contributing
 
