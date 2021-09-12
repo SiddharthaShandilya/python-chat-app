@@ -50,6 +50,7 @@ Here are the screenshots of working example on an AWS Linux Instance.
 - [Updating](#updating)
 - [Uninstallation](#uninstallation)
 - [Contributing](#contributing)
+- [Future Scope](#future-scope)
 
 </br></br>
 
@@ -192,6 +193,13 @@ gem uninstall colorls
 [(Back to top)](#table-of-contents)
 
 Your contributions are always welcome! Please have a look at the [contribution guidelines](CONTRIBUTING.md) first. :tada:
+
+
+</br>
+
+# Future Scope
+
+Adding Voice chat app will make it more user friendly
 
 
 
