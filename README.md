@@ -116,11 +116,13 @@ Man pages have been added. Checkout `man colorls`.
     ```
 
 </br></br>
+-->
 
 # Custom configurations
 
 [(Back to top)](#table-of-contents)
 
+<!--
 You can overwrite the existing icons and colors mapping by copying the yaml files from `$(dirname $(gem which colorls))/yaml` into `~/.config/colorls`, and changing them.
 
 - To overwrite color mapping :
